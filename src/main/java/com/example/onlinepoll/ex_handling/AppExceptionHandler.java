@@ -3,6 +3,7 @@ package com.example.onlinepoll.ex_handling;
 import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -32,5 +33,10 @@ public class AppExceptionHandler {
             message.append(violation.getMessage().concat(";"));
         }
         return new ResponseEntity<>(message.toString(), HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Object> badCredentialsExceptionHandler(BadCredentialsException e) {
+        return new ResponseEntity<>("user name or password is wrong", HttpStatus.UNAUTHORIZED);
     }
 }
