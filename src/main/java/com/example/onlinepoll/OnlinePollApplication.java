@@ -20,7 +20,7 @@ public class OnlinePollApplication implements CommandLineRunner {
     public void run(String... args) {
         int count = userRepository.findAll().size();
         if (count==0) {
-            User admin = new User("anes","hekmat","anes12","anes123456");
+            User admin = new User("anes","hekmat","admin","demo123");
             userRepository.save(admin);
         }
     }
